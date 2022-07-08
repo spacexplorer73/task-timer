@@ -1,0 +1,293 @@
+* {
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box;
+    font-family: 'Raleway';
+}
+
+.nav {
+    height: 10vh;
+    background-color: #e5e5e5;
+    padding: 10px 0;
+    transition: background-color 0.4s ease-in-out;
+}
+
+.nav-dark {
+    background-color: #111111 !important;
+}
+
+.nav-menu {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.nav-menu-title {
+    color: #1b1b1b;
+    transition: color 0.4s ease-in-out;
+}
+
+.nav-menu-title-dark{
+    color: #ffffff !important;
+}
+
+.dark-mode-switch {
+    border: 3px solid #1b1b1b;
+    border-radius: 50px;
+    padding: 15px;
+    cursor: pointer;
+    color: #1b1b1b;
+    transition: all 0.4s ease-in-out;
+}
+
+.dark-mode-switch-active {
+    border: 3px solid #ffffff !important;
+    color: #ffffff !important;
+}
+
+.dark-mode-switch i {
+    font-size: 25px;
+}
+
+.app {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 90vh;
+    background-color: #ffffff;
+    transition: background-color 0.4s ease-in-out;
+}
+
+.app-dark {
+    background-color: #1b1b1b !important;
+}
+
+.main-container {
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    width: 100%; 
+    height: auto;
+    margin: 40px 0;
+}
+
+.task-container {
+    display: flex; 
+    justify-content: space-around; 
+    align-items: center; 
+    width: 60%; 
+    border: 1px solid #1b1b1b;
+    border-radius: 0.3rem;
+    padding: 10px;
+    box-shadow: 20px 20px 50px 10px #1f78cc;
+    transition: border 0.4s ease-in-out;
+}
+
+.task-container-dark {
+    border: 1px solid #ffffff !important;
+}
+
+.task-details {
+    display: flex;
+    justify-content: flex-start; 
+    align-items: center;
+    flex: 1;
+}
+
+.task-props {
+    margin-right: 20px;
+}
+
+.task-title {
+    color: #1b1b1b;
+    transition: color 0.4s ease-in-out;
+}
+
+.task-title-dark {
+    color: #ffffff;
+}
+
+.task-image {
+    width: 75px;
+}
+
+.timer {
+    width: 140px;
+    height: 65px;
+    font-size: 26px;
+    color: #1f78cc;
+    cursor: pointer;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.footer {
+    position: fixed;
+    display: flex;
+    justify-content: flex-end;
+    align-items: end;
+    width: 100%;
+    height: 10vh;
+    top: 90vh;
+    padding: 30px;
+}
+
+.footer-button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.footer-helperText {
+    opacity: 0;
+    font-size: 20px;
+    font: bold;
+    border-radius: 5px;
+    background-color: #ffffff;
+    color: #111111;
+    padding: 3px;
+    transition: opacity 0.3s ease-in-out, background-color 0.4s ease-in-out, color 0.4s ease-in-out;
+    margin-bottom: 10px;
+}
+
+.footer-helperText-dark {
+    background-color: #111111;
+    color: #fff;
+}
+
+.footer-addTask:hover .footer-helperText {
+    opacity: 1;
+}
+
+.fa-clipboard-list {
+    color: #111111;
+    width: 100%;
+    font-size: 75px;
+    /* Change color, by adding font awesome */
+    transition: font-size 0.3s ease-in-out, color 0.1s ease-in-out;
+}
+
+.fa-clipboard-list-dark {
+    color: #ffffff;
+}
+
+.footer-addTask:hover .fa-clipboard-list{
+    font-size: 100px;
+}
+
+.fa-clipboard-list:active {
+    color: #e5e5e5;
+}
+
+.fa-clipboard-list-dark:active {
+    color: #111111;
+}
+
+/* Modal CSS */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+  
+  /* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    height: auto;
+}
+  
+  /* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+  
+.close:hover, .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-close {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.modal-title {
+    font-size: 20px;
+}
+
+.modal-task-input {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.modal-task-input label {
+    font-size: 20px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.modal-task-input label:nth-child(1) {
+    margin-left: 0px;
+}
+
+.modal-task-name {
+    width: 30%;
+    height: 30px;
+    font-size: 20px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.modal-task-time {
+    width: 3%;
+    font-size: 20px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+/* To remove the up/down arrows in text="number" */
+.modal-task-time::-webkit-outer-spin-button, .modal-task-time::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.modal-add-task-btn {
+    width: 10%;
+    height: 30px;
+    font-size: 15px;
+    transition: background-color 0.3s ease-in-out, width 0.1s ease-in-out, height 0.1s ease-in-out;
+    cursor: pointer;
+    border: none;
+    background-color: #aaaaaa;
+}
+
+.modal-add-task-btn:hover {
+    background-color: #1f78cc;
+    color: #fff;
+}
+
+.modal-add-task-btn:active {
+    width: 11%;
+    height: 35px;
+}

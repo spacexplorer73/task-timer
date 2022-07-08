@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"></link>
+    <link rel="stylesheet" type="text/css" href="style.css"></link>
+    <title>Task Timer</title>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-menu">
+            <h1 class="nav-menu-title">Task Timer</h1>
+            <div class="dark-mode-switch">
+                <i class="fa-solid fa-moon"></i>
+            </div>
+        </div>
+    </nav>
+    <div class="app" id="app"></div>
+    <template id="sample-task">
+        <div class="main-container">
+            <div class="task-container">
+                <div class="task-details">
+                    <div class="task-props"><img src="assets/task.png" alt="task-logo" class="task-image" /></div>
+                    <div class="task-props"><h2 class="task-title" id="task">Task 1</h2></div>
+                </div>
+                <div class="task-timer">
+                    <button onclick="toggleTimer(id)" class="timer" name="timer" id="timer">3</button>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-close">
+                <p class="modal-title"><u>Create Task</u></p>
+                <span onclick="handleCloseModal()" class="close">&times;</span>
+            </div>
+            <form class="modal-task-details" method="post">
+                <div class="modal-task-input">
+                    <label for="task-name">Task : </label>
+                    <input required type="text" id="task-name" class="modal-task-name" /><br>
+                </div>
+                <div class="modal-task-input">
+                    <label>Time : </label>
+                    <input type="number" value="0" id="task-time-hr" class="modal-task-time" />
+                    <label for="task-time-hr">h</label>
+                    <input type="number" value="0" id="task-time-min" class="modal-task-time" />
+                    <label for="task-time-hr">min</label>
+                    <input type="number" value="0" id="task-time-sec" class="modal-task-time" />
+                    <label for="task-time-sec">sec</label><br>
+                </div>
+                <div class="modal-task-input">
+                    <button type="submit" class="modal-add-task-btn">Add Task</button>
+                </div>
+            </form>
+        </div>
+      
+    </div>
+
+    <!-- Add Task -->
+    <div class="footer">
+        <div class="footer-addTask">
+            <div class="footer-helperText">Add Tasks</div>
+            <button onclick="handleOpenModal()" class="footer-button" name="add-task"><i class="fa-solid fa-clipboard-list"></i></button>
+        </div>
+    </div>
+
+    <audio id="timer-chime">
+        <source src="assets/timer.mp3">
+    </audio>
+    <script src="script.js"></script>
+</body>
+</html>
