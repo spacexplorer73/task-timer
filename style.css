@@ -138,7 +138,8 @@
 
 @media screen and (max-width: 768px) {
     .timer {
-        width: 6rem;
+        width: 5rem;
+        font-size: 15px;
     }
 }
 
@@ -162,7 +163,7 @@
 .footer-helperText {
     opacity: 0;
     font-size: 20px;
-    font: bold;
+    font-weight: bold;
     border-radius: 5px;
     background-color: #ffffff;
     color: #111111;
@@ -202,6 +203,20 @@
 
 .fa-clipboard-list-dark:active {
     color: #111111;
+}
+
+@media screen and (max-width: 768px) {
+    .footer-helperText {
+        font-size: 15px;
+    }
+
+    .fa-clipboard-list {
+        font-size: 50px;
+    }
+
+    .footer-addTask:hover .fa-clipboard-list{
+        font-size: 75px;
+    }
 }
 
 /* Modal CSS */
