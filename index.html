@@ -10,6 +10,7 @@
     <title>Task Timer</title>
 </head>
 <body>
+    <!-- Navbar -->
     <nav class="nav">
         <div class="nav-menu">
             <h1 class="nav-menu-title">Task Timer</h1>
@@ -19,6 +20,8 @@
         </div>
     </nav>
     <div class="app" id="app"></div>
+
+    <!-- Template -->
     <template id="sample-task">
         <div class="main-container">
             <div class="task-container">
@@ -40,11 +43,13 @@
                 <p class="modal-title"><u>Create Task</u></p>
                 <span onclick="handleCloseModal()" class="close">&times;</span>
             </div>
+
             <form class="modal-task-details" method="post">
                 <div class="modal-task-input">
                     <label for="task-name">Task : </label>
                     <input required type="text" id="task-name" class="modal-task-name" /><br>
                 </div>
+
                 <div class="modal-task-input">
                     <label>Time : </label>
                     <input type="number" value="0" id="task-time-hr" class="modal-task-time" />
@@ -54,12 +59,12 @@
                     <input type="number" value="0" id="task-time-sec" class="modal-task-time" />
                     <label for="task-time-sec">sec</label><br>
                 </div>
+
                 <div class="modal-task-input">
                     <button type="submit" class="modal-add-task-btn">Add Task</button>
                 </div>
             </form>
         </div>
-      
     </div>
 
     <!-- Add Task -->
@@ -70,6 +75,7 @@
         </div>
     </div>
 
+    <!-- Audio -->
     <audio id="timer-chime">
         <source src="assets/timer.mp3">
     </audio>

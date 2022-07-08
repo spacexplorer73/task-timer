@@ -87,6 +87,12 @@
     transition: border 0.4s ease-in-out;
 }
 
+@media screen and (max-width: 768px) {
+    .task-container {
+        width: 90%;
+    }
+}
+
 .task-container-dark {
     border: 1px solid #ffffff !important;
 }
@@ -115,6 +121,12 @@
     width: 75px;
 }
 
+@media screen and (max-width: 768px) {
+    .task-image {
+        width: 50px;
+    }
+}
+
 .timer {
     width: 140px;
     height: 65px;
@@ -122,6 +134,12 @@
     color: #1f78cc;
     cursor: pointer;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+@media screen and (max-width: 768px) {
+    .timer {
+        width: 6rem;
+    }
 }
 
 .footer {
@@ -207,15 +225,20 @@
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
+    border-radius: 20px;
     width: 80%;
     height: auto;
+}
+
+.modal-content-dark {
+    background-color: #1b1b1b;
 }
   
   /* The Close Button */
 .close {
     color: #aaaaaa;
     float: right;
-    font-size: 28px;
+    font-size: 32px;
     font-weight: bold;
 }
   
@@ -290,4 +313,31 @@
 .modal-add-task-btn:active {
     width: 11%;
     height: 35px;
+}
+
+@media screen and (max-width: 768px) {
+    .modal-content {
+        height: 90%;
+    }
+
+    .modal-task-input label {
+        font-size: 15px;
+    }
+
+    .modal-task-name {
+        width: 70%;
+    }
+
+    .modal-task-time {
+        width: 10%;
+    }
+
+    .modal-add-task-btn {
+        width: 100%;
+    }
+
+    .modal-add-task-btn:active {
+        width: 61%;
+        height: 35px;
+    }
 }
