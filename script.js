@@ -2,6 +2,7 @@ var modal = document.getElementById("myModal");
 var span = document.getElementsByClassName("close")[0];
 var modalTaskName = document.querySelector(".modal-task-name");
 var modalTaskTime = document.querySelectorAll(".modal-task-time");
+localStorage.setItem('color-mode', "white");
 
 // open modal
 function handleOpenModal () {
@@ -29,7 +30,10 @@ const taskTimeSec = document.getElementById("task-time-sec");
 // Lifecycle
 const existingTasks = JSON.parse(localStorage.getItem('tasks'));
 const taskData = existingTasks || [];
-var cnt = 1 || existingTasks.length;
+var maxId = Math.max(...taskData.map(task => task.id));
+
+var cnt;
+(existingTasks ? cnt = maxId + 1 : cnt = 1);
 
 // To populate existing todos
 taskData.forEach(task => {
@@ -39,21 +43,20 @@ taskData.forEach(task => {
 function displayTask(task) {
     var template = document.getElementById("sample-task").content;
     var copyTask = document.importNode(template, true);
-
     // console.log(task);
 
-    copyTask.getElementById("task").setAttribute('id', `task-${cnt}`);
-    copyTask.getElementById(`task-${cnt}`).innerHTML = task.taskName;
-    copyTask.getElementById("timer").setAttribute('id', `timer-${cnt}`); 
-    copyTask.getElementById(`timer-${cnt}`).innerHTML = task.taskTimeHr + " : " + task.taskTimeMin + " : " + task.taskTimeSec;
+    copyTask.getElementById("delete").setAttribute('id', `delete-${task.id}`);
+    copyTask.getElementById("task").setAttribute('id', `task-${task.id}`);
+    copyTask.getElementById(`task-${task.id}`).innerHTML = task.taskName;
+    copyTask.getElementById("timer").setAttribute('id', `timer-${task.id}`); 
+    copyTask.getElementById(`timer-${task.id}`).innerHTML = task.taskTimeHr + " : " + task.taskTimeMin + " : " + task.taskTimeSec;
     cnt = cnt + 1;
-
     app.insertBefore(copyTask, app.firstChild);
     
 }
 
 function addTasks(task) {
-    taskData.unshift(task);
+    taskData.push(task);
     displayTask(task);
     localStorage.setItem('tasks', JSON.stringify(taskData));
 }
@@ -61,9 +64,23 @@ function addTasks(task) {
 form.onsubmit = function (e) {
     e.preventDefault();
 
-    var task = { taskName: taskName.value, taskTimeHr: taskTimeHr.value, taskTimeMin: taskTimeMin.value, taskTimeSec: taskTimeSec.value };
+    var task = { id: cnt, taskName: taskName.value, taskTimeHr: taskTimeHr.value, taskTimeMin: taskTimeMin.value, taskTimeSec: taskTimeSec.value };
     addTasks(task);
     handleCloseModal();
+}
+
+// delete task
+function deleteTask(id) {
+    var index = parseInt(id.split('-')[1]);
+
+    // delete from localStorage
+    const existingTasks = JSON.parse(localStorage.getItem('tasks'));
+    var updatedTasks = existingTasks.filter(task => task.id !== index);
+    localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+
+    // delete immediately from screen
+    const deleteHTML = document.getElementById(`delete-${index}`);
+    deleteHTML.parentElement.parentElement.parentElement.remove();
 }
 
 // start timer
@@ -129,7 +146,8 @@ const taskTitle = document.querySelectorAll(".task-title");
 const footerHelperText = document.querySelector(".footer-helperText");
 const addTasksIcon = document.querySelector(".fa-clipboard-list");
 
-darkModeToggleBtn.addEventListener('click', function() {
+darkModeToggleBtn.addEventListener('click', function () {
+    localStorage.setItem('color-mode', "dark");
     darkModeIcon.classList.toggle("fa-sun");
     darkModeIcon.classList.toggle("fa-moon");
 
@@ -145,4 +163,4 @@ darkModeToggleBtn.addEventListener('click', function() {
 
     footerHelperText.classList.toggle("footer-helperText-dark");
     addTasksIcon.classList.toggle("fa-clipboard-list-dark");
-})
+});
