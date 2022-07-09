@@ -50,7 +50,6 @@ function displayTask(task) {
     copyTask.getElementById(`task-${task.id}`).innerHTML = task.taskName;
     copyTask.getElementById("timer").setAttribute('id', `timer-${task.id}`); 
     copyTask.getElementById(`timer-${task.id}`).innerHTML = task.taskTimeHr + " : " + task.taskTimeMin + " : " + task.taskTimeSec;
-    cnt = cnt + 1;
     app.insertBefore(copyTask, app.firstChild);
     
 }
@@ -63,9 +62,9 @@ function addTasks(task) {
 
 form.onsubmit = function (e) {
     e.preventDefault();
-
     var task = { id: cnt, taskName: taskName.value, taskTimeHr: taskTimeHr.value, taskTimeMin: taskTimeMin.value, taskTimeSec: taskTimeSec.value };
     addTasks(task);
+    cnt = cnt + 1;
     handleCloseModal();
 }
 
