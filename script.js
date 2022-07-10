@@ -85,7 +85,7 @@ function deleteTask(id) {
 }
 
 // start timer
-var timer;
+var timer = {};
 
 // audio settings
 var audio = document.getElementById("timer-chime");
@@ -107,10 +107,10 @@ function toggleTimer (id) {
 
     if(isTimerOn === `${index}-true`) {
         timerBtn.value = "false";
-        clearInterval(timer);
+        clearInterval(timer[id]);
         console.log(`${taskName} - ${isTimerOn}`);
     } else {
-        timer = setInterval(function () {
+        timer[id] = setInterval(function () {
             timerBtn.value = "true";
             console.log(`${taskName} - ${isTimerOn}`);
             hours = Math.floor(timerCount / 3600);
@@ -130,7 +130,7 @@ function toggleTimer (id) {
                     alert(`Time over for ${taskName}`);
                     audio.pause();
                 }, 500);
-                clearInterval(timer);
+                clearInterval(timer[id]);
             }
     
             timerCount--;
