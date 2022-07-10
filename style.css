@@ -5,6 +5,14 @@
     font-family: 'Raleway';
 }
 
+body {
+    transition: background-color 0.4s ease-in-out;
+}
+
+.body-dark {
+    background-color: #1b1b1b;
+}
+
 .nav {
     position: sticky;
     top: 0;
@@ -59,7 +67,6 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
-    height: 90vh;
     background-color: #ffffff;
     transition: background-color 0.4s ease-in-out;
 }

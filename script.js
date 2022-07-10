@@ -2,7 +2,7 @@ var modal = document.getElementById("myModal");
 var span = document.getElementsByClassName("close")[0];
 var modalTaskName = document.querySelector(".modal-task-name");
 var modalTaskTime = document.querySelectorAll(".modal-task-time");
-localStorage.setItem('color-mode', "white");
+localStorage.setItem("color-mode", "white");
 
 // open modal
 function handleOpenModal () {
@@ -42,6 +42,7 @@ taskData.forEach(task => {
 function displayTask(task) {
     var template = document.getElementById("sample-task").content;
     var copyTask = document.importNode(template, true);
+    var colorMode = localStorage.getItem("color-mode");
     // console.log(task);
 
     copyTask.getElementById("delete").setAttribute('id', `delete-${task.id}`);
@@ -50,6 +51,10 @@ function displayTask(task) {
     copyTask.getElementById("timer").setAttribute('id', `timer-${task.id}`); 
     copyTask.getElementById(`timer-${task.id}`).innerHTML = task.taskTimeHr + " : " + task.taskTimeMin + " : " + task.taskTimeSec;
     app.insertBefore(copyTask, app.firstChild);
+    
+    if(colorMode === "dark") {
+        addTaskToggleDarkMode(task.id);
+    }
 }
 
 function addTasks(task) {
@@ -85,7 +90,7 @@ function deleteTask(id) {
 }
 
 // start timer
-var timer;
+var timer = {};
 
 // audio settings
 var audio = document.getElementById("timer-chime");
@@ -107,12 +112,10 @@ function toggleTimer (id) {
 
     if(isTimerOn === `${index}-true`) {
         timerBtn.value = "false";
-        clearInterval(timer);
-        console.log(`${taskName} - ${isTimerOn}`);
+        clearInterval(timer[id]);
     } else {
-        timer = setInterval(function () {
+        timer[id] = setInterval(function () {
             timerBtn.value = "true";
-            console.log(`${taskName} - ${isTimerOn}`);
             hours = Math.floor(timerCount / 3600);
             minutes = Math.floor(( timerCount - (hours * 3600) ) / 60);
             seconds = Math.floor(timerCount - (hours * 3600) - (minutes * 60));
@@ -130,7 +133,7 @@ function toggleTimer (id) {
                     alert(`Time over for ${taskName}`);
                     audio.pause();
                 }, 500);
-                clearInterval(timer);
+                clearInterval(timer[id]);
             }
     
             timerCount--;
@@ -144,20 +147,30 @@ const darkModeToggleBtn = document.querySelector(".dark-mode-switch");
 const darkModeIcon = document.querySelector(".fa-solid");
 const nav = document.querySelector("nav");
 const navMenuTitle = document.querySelector(".nav-menu-title");
-const taskContainer = document.querySelectorAll(".task-container");
-const taskTitle = document.querySelectorAll(".task-title");
 const footerHelperText = document.querySelector(".footer-helperText");
 const addTasksIcon = document.querySelector(".fa-clipboard-list");
+const body = document.querySelector("body");
+var colorMode = localStorage.getItem("color-mode");
 
 darkModeToggleBtn.addEventListener('click', function () {
-    localStorage.setItem('color-mode', "dark");
+    const taskContainer = document.querySelectorAll(".task-container");
+    const taskTitle = document.querySelectorAll(".task-title");
+    var colorMode = localStorage.getItem("color-mode");
+
+    // saving colorMode in localStorage
+    (colorMode === 'white' || !colorMode) ? 
+    localStorage.setItem('color-mode', "dark")
+    :
+    localStorage.setItem('color-mode', "white");
+
     darkModeIcon.classList.toggle("fa-sun");
     darkModeIcon.classList.toggle("fa-moon");
 
+    app.classList.toggle("app-dark");
     nav.classList.toggle("nav-dark");
     navMenuTitle.classList.toggle("nav-menu-title-dark");
     darkModeToggleBtn.classList.toggle("dark-mode-switch-active");
-    app.classList.toggle("app-dark");
+    body.classList.toggle("body-dark");
 
     for(let i = 0; i < taskContainer.length; i++) {
         taskContainer[i].classList.toggle("task-container-dark");
@@ -167,3 +180,11 @@ darkModeToggleBtn.addEventListener('click', function () {
     footerHelperText.classList.toggle("footer-helperText-dark");
     addTasksIcon.classList.toggle("fa-clipboard-list-dark");
 });
+
+function addTaskToggleDarkMode (id) {
+    const taskTitle1 = document.getElementById(`task-${id}`);
+    const taskContainer1 = taskTitle1.parentElement.parentElement.parentElement;
+
+    taskTitle1.classList.toggle("task-title-dark");
+    taskContainer1.classList.toggle("task-container-dark");
+}
