@@ -65,7 +65,7 @@ function addTasks(task) {
 
 form.onsubmit = function (e) {
     e.preventDefault();
-    var task = { id: cnt, taskName: taskName.value, taskTimeHr: taskTimeHr.value, taskTimeMin: taskTimeMin.value, taskTimeSec: taskTimeSec.value };
+    var task = { id: cnt, taskName: taskName.value, taskTimeHr: taskTimeHr.value || 0, taskTimeMin: taskTimeMin.value || 0, taskTimeSec: taskTimeSec.value || 0 };
     addTasks(task);
     cnt = cnt + 1;
     handleCloseModal();
@@ -155,6 +155,7 @@ var colorMode = localStorage.getItem("color-mode");
 darkModeToggleBtn.addEventListener('click', function () {
     const taskContainer = document.querySelectorAll(".task-container");
     const taskTitle = document.querySelectorAll(".task-title");
+    const deleteTaskIcon = document.querySelectorAll(".fa-trash");
     var colorMode = localStorage.getItem("color-mode");
 
     // saving colorMode in localStorage
@@ -175,6 +176,7 @@ darkModeToggleBtn.addEventListener('click', function () {
     for(let i = 0; i < taskContainer.length; i++) {
         taskContainer[i].classList.toggle("task-container-dark");
         taskTitle[i].classList.toggle("task-title-dark");
+        deleteTaskIcon[i].classList.toggle("fa-trash-dark");
     }
 
     footerHelperText.classList.toggle("footer-helperText-dark");
@@ -184,7 +186,9 @@ darkModeToggleBtn.addEventListener('click', function () {
 function addTaskToggleDarkMode (id) {
     const taskTitle1 = document.getElementById(`task-${id}`);
     const taskContainer1 = taskTitle1.parentElement.parentElement.parentElement;
+    const deleteTaskIcon1 = document.getElementById(`delete-${id}`).children[0];
 
     taskTitle1.classList.toggle("task-title-dark");
     taskContainer1.classList.toggle("task-container-dark");
+    deleteTaskIcon1.classList.toggle("fa-trash-dark");
 }

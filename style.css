@@ -163,6 +163,10 @@ body {
     font-size: 21px;
 }
 
+.fa-trash-dark {
+    color: #ffffff;
+}
+
 .timer {
     width: 140px;
     height: 65px;
@@ -227,7 +231,6 @@ body {
     color: #111111;
     width: 100%;
     font-size: 75px;
-    /* Change color, by adding font awesome */
     transition: font-size 0.3s ease-in-out, color 0.1s ease-in-out;
 }
 
@@ -284,7 +287,7 @@ body {
     border: 1px solid #888;
     border-radius: 20px;
     width: 80%;
-    height: auto;
+    height: 80%;
 }
 
 .modal-content-dark {
