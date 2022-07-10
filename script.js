@@ -31,7 +31,6 @@ const taskTimeSec = document.getElementById("task-time-sec");
 const existingTasks = JSON.parse(localStorage.getItem('tasks'));
 const taskData = existingTasks || [];
 var maxId = Math.max(...taskData.map(task => task.id));
-
 var cnt;
 (existingTasks ? cnt = maxId + 1 : cnt = 1);
 
@@ -51,7 +50,6 @@ function displayTask(task) {
     copyTask.getElementById("timer").setAttribute('id', `timer-${task.id}`); 
     copyTask.getElementById(`timer-${task.id}`).innerHTML = task.taskTimeHr + " : " + task.taskTimeMin + " : " + task.taskTimeSec;
     app.insertBefore(copyTask, app.firstChild);
-    
 }
 
 function addTasks(task) {
@@ -70,20 +68,23 @@ form.onsubmit = function (e) {
 
 // delete task
 function deleteTask(id) {
-    var index = parseInt(id.split('-')[1]);
+    var delIndex = parseInt(id.split('-')[1]);
 
     // delete from localStorage
     const existingTasks = JSON.parse(localStorage.getItem('tasks'));
-    var updatedTasks = existingTasks.filter(task => task.id !== index);
+    var updatedTasks = existingTasks.filter(task => task.id !== delIndex);
     localStorage.setItem('tasks', JSON.stringify(updatedTasks));
 
+    // when removing the last item, delete the localStorage to prevent errors
+    if(existingTasks.length === 1)
+        localStorage.removeItem("tasks");
+
     // delete immediately from screen
-    const deleteHTML = document.getElementById(`delete-${index}`);
+    const deleteHTML = document.getElementById(`delete-${delIndex}`);
     deleteHTML.parentElement.parentElement.parentElement.remove();
 }
 
 // start timer
-var isTimerOn = false;
 var timer;
 
 // audio settings
@@ -93,6 +94,7 @@ function toggleTimer (id) {
     var index = id.split('-')[1];
     const taskName = document.getElementById(`task-${index}`).innerHTML;
     const timerBtn = document.getElementById(id);
+    var isTimerOn = `${index}-${timerBtn.value}`;
 
     const timerHr = parseInt(timerBtn.innerHTML.split(" : ")[0]) || 0;
     const timerMin = parseInt(timerBtn.innerHTML.split(" : ")[1]) || 0;
@@ -103,18 +105,20 @@ function toggleTimer (id) {
 
     var hours, minutes, seconds;
 
-    if(isTimerOn) {
-        isTimerOn = false;
+    if(isTimerOn === `${index}-true`) {
+        timerBtn.value = "false";
         clearInterval(timer);
+        console.log(`${taskName} - ${isTimerOn}`);
     } else {
         timer = setInterval(function () {
-            isTimerOn = true;
+            timerBtn.value = "true";
+            console.log(`${taskName} - ${isTimerOn}`);
             hours = Math.floor(timerCount / 3600);
             minutes = Math.floor(( timerCount - (hours * 3600) ) / 60);
             seconds = Math.floor(timerCount - (hours * 3600) - (minutes * 60));
             
             timerBtn.innerHTML = hours + " : " + minutes + " : " + seconds;
-    
+
             if (timerCount <= -1) {
                 audio.loop = true;
                 audio.load();

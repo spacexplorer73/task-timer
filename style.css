@@ -182,6 +182,12 @@
     padding: 30px;
 }
 
+@media screen and (max-width: 768px) {
+    .footer {
+        margin-bottom: 50px;
+    }
+}
+
 .footer-button {
     background: transparent;
     border: none;
